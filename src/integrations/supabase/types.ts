@@ -14,7 +14,193 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bills: {
+        Row: {
+          amount: number | null
+          bill_month: string
+          created_at: string | null
+          current_reading: number
+          customer_id: string
+          due_date: string
+          id: string
+          meter_number: string
+          previous_reading: number
+          rate_per_unit: number
+          status: string | null
+          units_consumed: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          amount?: number | null
+          bill_month: string
+          created_at?: string | null
+          current_reading: number
+          customer_id: string
+          due_date: string
+          id?: string
+          meter_number: string
+          previous_reading?: number
+          rate_per_unit?: number
+          status?: string | null
+          units_consumed?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          amount?: number | null
+          bill_month?: string
+          created_at?: string | null
+          current_reading?: number
+          customer_id?: string
+          due_date?: string
+          id?: string
+          meter_number?: string
+          previous_reading?: number
+          rate_per_unit?: number
+          status?: string | null
+          units_consumed?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bills_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      complaints: {
+        Row: {
+          admin_response: string | null
+          created_at: string | null
+          customer_id: string
+          description: string
+          id: string
+          priority: string | null
+          status: string | null
+          subject: string
+          updated_at: string | null
+        }
+        Insert: {
+          admin_response?: string | null
+          created_at?: string | null
+          customer_id: string
+          description: string
+          id?: string
+          priority?: string | null
+          status?: string | null
+          subject: string
+          updated_at?: string | null
+        }
+        Update: {
+          admin_response?: string | null
+          created_at?: string | null
+          customer_id?: string
+          description?: string
+          id?: string
+          priority?: string | null
+          status?: string | null
+          subject?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "complaints_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          amount: number
+          bill_id: string
+          created_at: string | null
+          customer_id: string
+          id: string
+          payment_date: string | null
+          payment_method: string
+          status: string | null
+          transaction_id: string | null
+        }
+        Insert: {
+          amount: number
+          bill_id: string
+          created_at?: string | null
+          customer_id: string
+          id?: string
+          payment_date?: string | null
+          payment_method: string
+          status?: string | null
+          transaction_id?: string | null
+        }
+        Update: {
+          amount?: number
+          bill_id?: string
+          created_at?: string | null
+          customer_id?: string
+          id?: string
+          payment_date?: string | null
+          payment_method?: string
+          status?: string | null
+          transaction_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_bill_id_fkey"
+            columns: ["bill_id"]
+            isOneToOne: false
+            referencedRelation: "bills"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          address: string | null
+          created_at: string | null
+          full_name: string
+          id: string
+          is_admin: boolean | null
+          meter_number: string | null
+          phone_number: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string | null
+          full_name: string
+          id?: string
+          is_admin?: boolean | null
+          meter_number?: string | null
+          phone_number?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          address?: string | null
+          created_at?: string | null
+          full_name?: string
+          id?: string
+          is_admin?: boolean | null
+          meter_number?: string | null
+          phone_number?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
